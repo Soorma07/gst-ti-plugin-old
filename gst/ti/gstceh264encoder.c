@@ -25,18 +25,18 @@ GST_DEBUG_CATEGORY_STATIC (GST_CAT_DEFAULT);
 
 enum
 {
-	PROP_0,
-	PROP_D
+  PROP_0,
+  PROP_D
 };
 
 static void
-gst_ce_h264_encoder_base_init (GstBaseCEEncoderClass * klass)
+gst_ce_h264_encoder_base_init (GstCEH264EncoderClass * klass)
 {
   /* Initialize dynamic data */
 }
 
 static void
-gst_ce_h264_encoder_base_finalize (GstBaseCEEncoderClass * klass)
+gst_ce_h264_encoder_base_finalize (GstCEH264EncoderClass * klass)
 {
 }
 
@@ -44,9 +44,7 @@ static void
 gst_ce_h264_encoder_set_property (GObject * object, guint prop_id,
     const GValue * value, GParamSpec * pspec)
 {
-  //GstBaseCEVideoEncoder *base_enc = gst_ce_h264_encoder (object);
-
-  /* Set base params */
+  /* Set h264 encoder params */
   switch (prop_id) {
     default:
       break;
@@ -59,8 +57,7 @@ gst_ce_h264_encoder_get_property (GObject * object, guint prop_id,
     GValue * value, GParamSpec * pspec)
 {
 
-  //GstBaseCEVideoEncoder *base_enc = gst_ce_h264_encoder (object);
-
+  /* Get h264 encoder params */
   switch (prop_id) {
     default:
       break;
@@ -68,12 +65,12 @@ gst_ce_h264_encoder_get_property (GObject * object, guint prop_id,
 }
 
 static void
-gst_ce_h264_encoder_class_init (GstBaseCEEncoderClass * klass)
+gst_ce_h264_encoder_class_init (GstCEH264EncoderClass * klass)
 {
   GObjectClass *gobject_class = (GObjectClass *) klass;
 
-  GST_DEBUG_CATEGORY_INIT (gst_ce_h264_encoder_debug, "gstcevidenc1", 0,
-      "CE VIDENC1 Class");
+  GST_DEBUG_CATEGORY_INIT (gst_ce_h264_encoder_debug, "ceenc_h264", 0,
+      "CodecEngine h264 encoder");
 
   gobject_class->set_property = gst_ce_h264_encoder_set_property;
   gobject_class->get_property = gst_ce_h264_encoder_get_property;
@@ -86,7 +83,7 @@ gst_ce_h264_encoder_class_init (GstBaseCEEncoderClass * klass)
 }
 
 static void
-gst_ce_h264_encoder_class_finalize (GstBaseCEEncoderClass * klass,
+gst_ce_h264_encoder_class_finalize (GstCEH264EncoderClass * klass,
     gpointer * class_data)
 {
 }
@@ -102,7 +99,7 @@ gst_ce_h264_encoder_get_type (void)
     (GBaseInitFunc) gst_ce_h264_encoder_base_init,
     (GBaseFinalizeFunc) gst_ce_h264_encoder_base_finalize,
     (GClassInitFunc) gst_ce_h264_encoder_class_init,
-    (GClassFinalizeFunc) gst_ce_h264_encoder_class_finalize,
+    NULL,
     NULL,
     sizeof (GstCEH264Encoder),
     0,

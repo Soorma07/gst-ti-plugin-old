@@ -23,7 +23,6 @@
 #include <gstcevidenc1.h>
 
 G_BEGIN_DECLS
-
 #define GST_TYPE_CE_H264_ENCODER \
   (gst_ce_h264_encoder_get_type())
 #define GST_CE_H264_ENCODER(obj) \
@@ -34,10 +33,8 @@ G_BEGIN_DECLS
   (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_CE_H264_ENCODER))
 #define GST_IS_CE_H264_ENCODER_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_CE_H264_ENCODER))
-
-
-typedef struct _GstCEH264Encoder        GstCEH264Encoder;
-typedef struct _GstCEH264EncoderClass   GstCEH264EncoderClass;
+typedef struct _GstCEH264Encoder GstCEH264Encoder;
+typedef struct _GstCEH264EncoderClass GstCEH264EncoderClass;
 
 struct _GstCEH264Encoder
 {
@@ -47,9 +44,10 @@ struct _GstCEH264Encoder
 struct _GstCEH264EncoderClass
 {
   GstCEVIDENC1Class parent_class;
-  
+
 };
 
 GType gst_ce_h264_encoder_get_type (void);
 
+G_END_DECLS
 #endif /* __GST_CEH264_H__ */
