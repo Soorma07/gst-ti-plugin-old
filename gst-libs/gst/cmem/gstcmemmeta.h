@@ -27,19 +27,24 @@
 #include <xdc/std.h>
 #include <ti/sdo/ce/osal/Memory.h>
 
-G_BEGIN_DECLS typedef struct _GstCMEMMeta GstCMEMMeta;
+G_BEGIN_DECLS
 
-/**
- * GstMEMMeta:
- * @physical_address: physical_address of the buffer.
+/** 
+ * Contiguous memory (CMEM) metadata
  *
+ * This meta data is used to abstract hardware accelerated buffers (in the
+ * sense that they can be shared with hardware subsystems that does not 
+ * support MMU).
  */
 struct _GstCMEMMeta
 {
   GstMeta meta;
 
+  /** physical_address of the buffer */
   gpointer physical_address;
 };
+
+typedef struct _GstCMEMMeta GstCMEMMeta;
 
 const GstMetaInfo *gst_cmem_meta_get_info (void);
 #define GST_CMEM_META_INFO (gst_cmem_meta_get_info())
@@ -49,9 +54,21 @@ const GstMetaInfo *gst_cmem_meta_get_info (void);
 #define gst_buffer_add_cmem_meta(b) \
   ((GstCMEMMeta*)gst_buffer_add_meta((b),GST_CMEM_META_INFO,NULL))
 
+/** Obtains the physical address from a buffer that contains #_GstCMEMMeta
+ * @param buffer a GstBuffer that has GstCMEMMeta
+ * @returns a pointer to the physical address of the buffer, or NULL if the
+ *  buffer does not contains physical contiguous memory
+ * @related _GstCMEMMeta
+ */
 gpointer
 gst_buffer_get_cmem_physical_address (GstBuffer * buffer);
 
+/** Set the physical address of a buffer, appending a #_GstCMEMMeta metadata 
+ * if it does not have such metadata already.
+ * @param buffer a GstBuffer
+ * @param paddr a physical address of the buffer (should be contiguous on memory)
+ * @related _GstCMEMMeta
+ */
 void
 gst_buffer_set_cmem_physical_address (GstBuffer * buffer, gpointer paddr);
 

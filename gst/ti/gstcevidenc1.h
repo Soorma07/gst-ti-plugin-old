@@ -36,6 +36,10 @@ G_BEGIN_DECLS
 typedef struct _GstCEVIDENC1 GstCEVIDENC1;
 typedef struct _GstCEVIDENC1Class GstCEVIDENC1Class;
 
+/**
+ * This class implements CodecEngine VIDENC1 API
+ * @extends _GstCEBaseVideoEncoder
+ */
 struct _GstCEVIDENC1
 {
   GstCEBaseVideoEncoder base_video_encoder;

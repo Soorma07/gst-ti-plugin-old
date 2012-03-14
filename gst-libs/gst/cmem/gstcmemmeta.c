@@ -21,15 +21,6 @@
 
 #include "gstcmemmeta.h"
 
-/**
- * SECTION:gstcmemmeta
- * @short_description: Contiguous memory (CMEM) metadata
- *
- * This meta data is used to abstract hardware accelerated buffers (in the
- * sense that they can be shared with hardware subsystems that does not 
- * support MMU).
- */
-
 const GstMetaInfo *
 gst_cmem_meta_get_info (void)
 {
@@ -45,13 +36,6 @@ gst_cmem_meta_get_info (void)
   return meta_info;
 }
 
-/**
- * gst_buffer_get_cmem_physical_address:
- * @buffer: a GstBuffer
- * 
- * Returns: the physical address of the buffer, or NULL if the buffer does not
- * have the metadata
- */
 gpointer
 gst_buffer_get_cmem_physical_address (GstBuffer * buffer)
 {
@@ -61,11 +45,6 @@ gst_buffer_get_cmem_physical_address (GstBuffer * buffer)
   return NULL;
 }
 
-/**
- * gst_buffer_set_cmem_physical_address:
- * @buffer: a GstBuffer
- * @paddr: the physical address of the buffer
- */
 void
 gst_buffer_set_cmem_physical_address (GstBuffer * buffer, gpointer paddr)
 {

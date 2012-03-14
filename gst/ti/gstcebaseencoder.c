@@ -27,6 +27,7 @@
 #define GST_CAT_DEFAULT gst_ce_base_encoder_debug
 GST_DEBUG_CATEGORY_STATIC (GST_CAT_DEFAULT);
 
+
 enum
 {
   PROP_0,
@@ -48,13 +49,15 @@ static void
 gst_ce_base_encoder_set_property (GObject * object, guint prop_id,
     const GValue * value, GParamSpec * pspec)
 {
-
+  GST_DEBUG_OBJECT(object,"Entry to set_property base encoder");
+  
   /* Set base params */
   switch (prop_id) {
     default:
       break;
   }
-
+  
+  GST_DEBUG_OBJECT(object,"Leave set_property base encoder");
 }
 
 static void
@@ -74,18 +77,25 @@ gst_ce_base_encoder_get_property (GObject * object, guint prop_id,
   }
 }
 
+int encode(GstCEBaseEncoder *base_encoder, GstBuffer * rawData) {
+  return 0;  
+}
+
 static void
 gst_ce_base_encoder_class_init (GstCEBaseEncoderClass * klass)
 {
   GObjectClass *gobject_class = (GObjectClass *) klass;
-
+  
+  /* Init debug instance */
   GST_DEBUG_CATEGORY_INIT (gst_ce_base_encoder_debug, "cebaseencoder", 0,
       "CodecEngine base encoder class");
-
+  
+  /* Override inheritance methods */
   gobject_class->set_property = gst_ce_base_encoder_set_property;
   gobject_class->get_property = gst_ce_base_encoder_get_property;
   gobject_class->finalize = gst_ce_base_encoder_finalize;
-
+  
+  /* Install properties for the class */
   g_object_class_install_property (gobject_class, PROP_A,
       g_param_spec_boolean ("testa", "Test A", "Testing A", FALSE,
           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
@@ -106,6 +116,7 @@ gst_ce_base_encoder_init (GstCEBaseEncoder * base_encoder)
 GType
 gst_ce_base_encoder_get_type (void)
 {
+  
   static GType object_type = 0;
 
   if (object_type == 0) {
@@ -121,7 +132,7 @@ gst_ce_base_encoder_get_type (void)
       0,
       NULL,
     };
-
+    
     object_type = g_type_register_static (GST_TYPE_ELEMENT,
         "GstCEBaseEncoder", &object_info, 0);
   }
@@ -129,11 +140,11 @@ gst_ce_base_encoder_get_type (void)
   return object_type;
 };
 
-/** gst_ce_base_encoder_get_output_buffer
- * @base_encoder : a #GstCEBaseEncoder object
- * @size : size for the buffer
+/** @brief gst_ce_base_encoder_get_output_buffer
+ *  @param base_encoder : a #GstCEBaseEncoder object
+ *  @param size : size for the buffer
  *
- * Returns: a #GstBuffer 
+ *  @return a #GstBuffer 
  */
 GstBuffer *
 gst_ce_base_encoder_get_output_buffer (GstCEBaseEncoder * base_encoder,

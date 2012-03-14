@@ -33,12 +33,20 @@ G_BEGIN_DECLS
   (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_CE_H264_ENCODER))
 #define GST_IS_CE_H264_ENCODER_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_CE_H264_ENCODER))
+#define CE_H264_ENCODER_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_CE_H264_ENCODER, GstCEH264EncoderClass))
+
 typedef struct _GstCEH264Encoder GstCEH264Encoder;
 typedef struct _GstCEH264EncoderClass GstCEH264EncoderClass;
 
+/**
+ * This class implements the video encoder for h264
+ * @extends _GstCEVIDENC1
+ */
 struct _GstCEH264Encoder
 {
   GstCEVIDENC1 parent;
+
 };
 
 struct _GstCEH264EncoderClass
